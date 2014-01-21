@@ -41,12 +41,6 @@
  * echo $pForm;
  *
  *
- *
- * Create: $form->html = $form->head = $form->title = "create"
- * Read: $form["html"]
- * Update: $form["html"]["head"]["title"] = "update"
- * Delete: unset($form["head"])
- *
  * @category  NoSaladNet
  * @author    Mike Pretzlaw <pretzlaw@gmail.com>
  * @copyright 2014 Mike Pretzlaw
