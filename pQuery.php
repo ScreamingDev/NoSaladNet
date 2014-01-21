@@ -70,13 +70,27 @@ class pQuery
 
     protected $_attributeSet = array();
 
+    protected $_parent;
+
 
     /**
      * @param string $tag The container where everything will reside.
      */
-    public function __construct($tag = 'div')
+    public function __construct($tag = 'div', $parent = null)
     {
+        $this->_parent = $parent;
         $this->_tag = $tag;
+    }
+
+
+    /**
+     * Get the parent.
+     *
+     * @return static|null
+     */
+    public function getParent()
+    {
+        return $this->_parent;
     }
 
 
@@ -144,6 +158,11 @@ class pQuery
             return $this;
         }
 
+        if ($value instanceof Closure)
+        {
+            $value = $value();
+        }
+
         $this->_children[] = $value;
 
         return $this;
@@ -166,7 +185,7 @@ class pQuery
      */
     public function __invoke($name)
     {
-        return new pQuery($name);
+        return new pQuery($name, $this);
     }
 
 
@@ -191,15 +210,55 @@ class pQuery
     {
         if (count($arguments) > 0)
         {
-            $this->_attributeSet[$name] = $arguments[0];
-
-            return $this;
+            return $this->attr($name, $arguments[0]);
         }
 
-        if (isset($this->_attributeSet[$name]))
+        return $this->attr($name);
+    }
+
+
+    /**
+     * Get or set an attribute or all attributes.
+     *
+     * Imagine an input:
+     *
+     *      $input = new pQuery('input');
+     *      $input->name('bar')->value('priceless');
+     *
+     * You can play around with the attributes easily:
+     *
+     *      $allAttributes   = $input->attr();        // get all of 'em
+     *
+     *      $singleAttribute = $input->attr('value'); // look up what the value is
+     *      $singleAttribute = $input->value();       // would be the same
+     *
+     *      $input->('name', 'baz');                  // change an attribute
+     *      $input->name('baz');                      // would be the same ;)
+     *
+     *
+     * @param mixed $attributeName
+     * @param mixed $attributeValue
+     *
+     * @return $this
+     */
+    public function attr($attributeName = null, $attributeValue = false)
+    {
+        if (null == $attributeName)
         {
-            return $this->_attributeSet[$name];
+            return $this->_attributeSet;
         }
+
+        if (false == $attributeValue)
+        {
+            if (isset($this->_attributeSet[$name]))
+            {
+                return $this->_attributeSet[$name];
+            }
+
+            return null;
+        }
+
+        $this->_attributeSet[$attributeName] = $attributeValue;
 
         return $this;
     }
