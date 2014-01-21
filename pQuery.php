@@ -68,30 +68,28 @@ class pQuery
 
     protected $_children = array();
 
-    protected $_settings = array();
+    protected $_attributeSet = array();
 
 
+    /**
+     * @param string $tag The container where everything will reside.
+     */
     public function __construct($tag = 'div')
     {
         $this->_tag = $tag;
     }
 
 
-    function __get($name)
-    {
-        $static = new static($name);
-
-        $this->append($static);
-
-        return $static;
-    }
-
-
+    /**
+     * Just returning some HTML.
+     *
+     * @return string
+     */
     public function __toString()
     {
         $out = '<' . $this->_tag;
 
-        foreach (array_filter($this->_settings) as $key => $value)
+        foreach (array_filter($this->_attributeSet) as $key => $value)
         {
             $out .= ' ' . $key . '="' . $value . '"';
         }
@@ -120,15 +118,23 @@ class pQuery
     }
 
 
-    public function __set($name, $value)
-    {
-        $static = $this->__get($name);
-        $static->append($value);
-
-        return $static;
-    }
-
-
+    /**
+     * Add a new node inside.
+     *
+     *
+     * The code:
+     *
+     * $p = new pQuery('p');
+     * $p->append('some text');
+     *
+     * Will produce:
+     *
+     * <p>some text</p>
+     *
+     * @param $value The content which can be another pQuery-Node too.
+     *
+     * @return $this
+     */
     public function append($value)
     {
         if (is_array($value))
@@ -145,11 +151,18 @@ class pQuery
 
 
     /**
-     * .
+     * Create a new HTML element.
      *
-     * @param $name
      *
-     * @return $this
+     * Like:
+     *
+     * $p = new pQuery('p');
+     *
+     * $span = $p('span'); // same as "$span = new pQuery('span');"
+     *
+     * @param $name HTML-Node
+     *
+     * @return static
      */
     public function __invoke($name)
     {
@@ -157,18 +170,35 @@ class pQuery
     }
 
 
+    /**
+     * Get or change an attribute.
+     *
+     * $warning = new pQuery('span');
+     *
+     * // set style="warn"
+     * $warning->style('warn');
+     *
+     * // get whats inside
+     * $warning->style();
+     *
+     *
+     * @param $name Name of the attribute to change
+     * @param $arguments
+     *
+     * @return $this
+     */
     function __call($name, $arguments)
     {
         if (count($arguments) > 0)
         {
-            $this->_settings[$name] = $arguments[0];
+            $this->_attributeSet[$name] = $arguments[0];
 
             return $this;
         }
 
-        if (isset($this->_settings[$name]))
+        if (isset($this->_attributeSet[$name]))
         {
-            return $this->_settings[$name];
+            return $this->_attributeSet[$name];
         }
 
         return $this;
