@@ -27,11 +27,15 @@
  *  $pForm
  *      ->method('POST')
  *      ->action('?foo')
+ *
+ *      ->append("Enter your <b>name</b>:")
+ *
  *      ->append(
  *          $pForm('input')
  *              ->name('bar')
  *              ->id('baz')
  *      )
+ *
  *      ->append(
  *          $pForm('input')
  *              ->type('submit')
@@ -39,6 +43,16 @@
  *      );
  *
  * echo $pForm;
+ *
+ *
+ * Will create this output (without formatting):
+ *
+ *
+ * <form method="POST" action="?foo">
+ *     Enter your <b>name</b>:
+ *     <input name="bar" id="baz" />
+ *     <input type="submit" value="Done!" />
+ * </form>
  *
  *
  * @category  NoSaladNet
