@@ -1,3 +1,30 @@
+<?php
+
+/**
+ * Show progress information on current STDOUT.
+ *
+ * Currently only linear calculation of estimated time and
+ * progress is preserved.
+ *
+ * ## Examples
+ *
+ * ### Full format example
+ *
+ * You can get plenty of information to show
+ *
+ *     $progress             = new \Helper\ProgressInfo(
+ *         "\rImported :tasksDone of :tasksTotal rows (:percentage%, ~:estimatedTime left)"
+ *     );
+ *     $progress->tasksTotal = $someSource->countRows();
+ *
+ *     while ($row = $someSource->getRow()) {
+ *         $someImport->handles($row);
+ *
+ *         $progress->step();                // one more done - yeha!
+ *         $progress->printPerPercent(5);    // show it on every 5th percent tick
+ *     }
+ *
+ */
 class ProgressInfo
 {
     public $tasksTotal = 0;
