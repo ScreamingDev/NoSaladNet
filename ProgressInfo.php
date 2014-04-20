@@ -6,13 +6,28 @@
  * Currently only linear calculation of estimated time and
  * progress is preserved.
  *
+ * ## Format
+ *
+ * When created it can have any format you want:
+ *
+ *     $progress = new ProgressInfo('Did :percentage %. Wait :estimatedTime!');
+ *
+ * ### Placeholder
+ *
+ * Possible placeholder for the are:
+ *
+ * - :tasksDone     - The amount of done tasks (increased by `ProgressInfo::step()`)
+ * - :tasksTotal    - The amount of tasks to do
+ * - :percentage    - Relation between done and total tasks in percent (as integer).
+ * - :estimatedTime - Time the whole task will take approximately
+ *
  * ## Examples
  *
  * ### Full format example
  *
  * You can get plenty of information to show
  *
- *     $progress             = new \Helper\ProgressInfo(
+ *     $progress             = new \ProgressInfo(
  *         "\rImported :tasksDone of :tasksTotal rows (:percentage%, ~:estimatedTime left)"
  *     );
  *     $progress->tasksTotal = $someSource->countRows();
