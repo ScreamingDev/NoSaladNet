@@ -7,23 +7,23 @@
  * Copyright (c) 2013, Mike Pretzlaw
  * All rights reserved.
  *
- * @category  tndb
+ * @category  NoSaladNet
  * @package   Cache.php
  * @author    Mike Pretzlaw <pretzlaw@gmail.com>
  * @copyright 2013 Mike Pretzlaw
- * @license   http://github.com/sourcerer-mike/tndb/blob/master/License.md BSD 3-Clause ("BSD New")
- * @link      http://github.com/sourcerer-mike/tndb
+ * @license   http://github.com/sourcerer-mike/NoSaladNet/blob/master/License.md BSD 3-Clause ("BSD New")
+ * @link      http://github.com/sourcerer-mike/NoSaladNet
  * @since     $VERSION$
  */
 
 /**
  * Class Cache.
  *
- * @category  tndb
+ * @category  NoSaladNet
  * @author    Mike Pretzlaw <pretzlaw@gmail.com>
  * @copyright 2013 Mike Pretzlaw
- * @license   http://github.com/sourcerer-mike/tndb/blob/master/License.md BSD 3-Clause ("BSD New")
- * @link      http://github.com/sourcerer-mike/tndb
+ * @license   http://github.com/sourcerer-mike/NoSaladNet/blob/master/License.md BSD 3-Clause ("BSD New")
+ * @link      http://github.com/sourcerer-mike/NoSaladNet
  * @since     $VERSION$
  */
 class Cache
