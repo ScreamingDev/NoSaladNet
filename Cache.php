@@ -36,6 +36,11 @@ class Cache
                         md5(__DIR__) . DIRECTORY_SEPARATOR;
         }
 
+        if (!is_readable($basePath))
+        {
+            mkdir($basePath, 0755, true);
+        }
+
         $this->_basePath = $basePath;
         $this->_expires  = 0;
     }
@@ -82,7 +87,7 @@ class Cache
      */
     protected function hasData($key)
     {
-        return filemtime($this->getBasePath($key)) > time() - $this->_expires
-               && file_exists($this->getBasePath($key));
+        return file_exists($this->getBasePath($key))
+               && filemtime($this->getBasePath($key)) > time() - $this->_expires;
     }
 }
