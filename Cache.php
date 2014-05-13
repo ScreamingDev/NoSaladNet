@@ -28,6 +28,9 @@
  */
 class Cache
 {
+    const DAY = 86400;
+    const HOUR = 3600;
+
     function __construct($basePath = null, $expires = 0)
     {
         if (null == $basePath)
@@ -42,7 +45,7 @@ class Cache
         }
 
         $this->_basePath = $basePath;
-        $this->_expires  = 0;
+        $this->_expires  = $expires;
     }
 
 
@@ -54,10 +57,10 @@ class Cache
 
     function getData($key)
     {
-        $fileName = $this->getBasePath($key);
         if ($this->hasData($key))
         {
-            $content = file_get_contents($fileName);
+            $fileName = $this->getBasePath($key);
+            $content  = file_get_contents($fileName);
 
             return unserialize($content);
         }
