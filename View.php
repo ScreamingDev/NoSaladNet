@@ -5,7 +5,7 @@ namespace NoSaladNet;
 class View
 {
     protected $_file;
-    protected $_data;
+    protected $_data = array();
 
     public function __construct($file)
     {
