@@ -16,6 +16,8 @@
  * @since     $VERSION$
  */
 
+namespace NoSaladNet;
+
 /**
  * Create HTML almost like in jQuery with PHP.
  *
@@ -158,7 +160,7 @@ class pQuery
             return $this;
         }
 
-        if ($value instanceof Closure)
+        if ($value instanceof \Closure)
         {
             $value = $value();
         }
@@ -250,9 +252,9 @@ class pQuery
 
         if (false == $attributeValue)
         {
-            if (isset($this->_attributeSet[$name]))
+            if (isset($this->_attributeSet[$attributeName]))
             {
-                return $this->_attributeSet[$name];
+                return $this->_attributeSet[$attributeName];
             }
 
             return null;

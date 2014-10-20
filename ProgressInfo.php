@@ -1,5 +1,7 @@
 <?php
 
+namespace NoSaladNet;
+
 /**
  * Show progress information on current STDOUT.
  *

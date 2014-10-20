@@ -1,5 +1,7 @@
 <?php
 
+namespace NoSaladNet;
+
 class View
 {
     protected $_file;

@@ -16,6 +16,8 @@
  * @since     $VERSION$
  */
 
+namespace NoSaladNet;
+
 /**
  * Class Cache.
  *
